@@ -34,13 +34,15 @@ async def main(message: cl.Message):
     print(f"Assistant ID: {assistant_id}")
     print(f"Thread ID: {thread_id}")
 
-    async with cl.Step(name="recherche dans la documentation") as step:
+    async with cl.Step(name="Scanning documentation") as step:
 
         async for chunk in langraph_client.runs.stream(
             thread_id=thread_id,
             assistant_id=assistant_id,
             input={
-                "question" : message.content
+                "messages": [
+                    HumanMessage(content=message.content)
+                ]
             },
             stream_mode="events",
         ):
