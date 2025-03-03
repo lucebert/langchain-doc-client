@@ -44,6 +44,11 @@ async def main(message: cl.Message):
                     HumanMessage(content=message.content)
                 ]
             },
+            config={
+                "search_kwargs": {
+                    "k": 10
+                }
+            },
             stream_mode="events",
         ):
             if chunk.event == "events":
