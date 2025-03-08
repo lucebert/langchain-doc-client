@@ -1,10 +1,21 @@
 import os
-
+from typing import Dict, Optional
 import chainlit as cl
 from langgraph_sdk import get_client
 from langchain_core.messages import HumanMessage
 
 LANGGRAPH_DEPLOYMENT = os.environ.get("LANGGRAPH_DEPLOYMENT")
+
+# Only define the OAuth callback if DATABASE_URL is set
+if os.environ.get("DATABASE_URL"):
+    @cl.oauth_callback
+    def oauth_callback(
+      provider_id: str,
+      token: str,
+      raw_user_data: Dict[str, str],
+      default_user: cl.User,
+    ) -> Optional[cl.User]:
+      return default_user
 
 @cl.on_chat_start
 async def on_start():

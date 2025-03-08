@@ -3,13 +3,14 @@ requires = ["setuptools>=73.0.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "self-rag-client"
+name = "langchain-doc-client"
 version = "0.1.0"
 description = "A RAG (Retrieval-Augmented Generation) client implementation"
 authors = [
     { name = "Luc EBERT", email = "lucebert@github.com" }
 ]
 dependencies = [
+    "asyncpg>=0.30.0",
     "chainlit>=2.2.0",
     "langchain-core>=0.3.34",
     "langgraph-sdk>=0.1.51",
