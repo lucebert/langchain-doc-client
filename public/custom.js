@@ -2,6 +2,12 @@ function addLoginDisclaimer() {
     // Find the login form
     const loginForm = document.querySelector('form');
     if (loginForm) {
+        // Create a container for both elements
+        const container = document.createElement('div');
+        container.style.display = 'flex';
+        container.style.flexDirection = 'column';
+        container.style.alignItems = 'center';
+        
         // Create a disclaimer element
         const disclaimerElement = document.createElement('div');
         
@@ -13,12 +19,11 @@ function addLoginDisclaimer() {
         disclaimerElement.style.color = 'rgba(255, 255, 255, 0.8)';
         disclaimerElement.style.maxWidth = '400px';
         disclaimerElement.style.margin = '0 auto';
-        disclaimerElement.style.textAlign = 'center'; // Explicitly set text alignment
+        disclaimerElement.style.textAlign = 'center';
         
-        // Create styled content with proper centering
+        // Simplified text
         disclaimerElement.innerHTML = `
-            <p style="margin-bottom: 8px; text-align: center;">Login is useful for conversation persistence</p>
-            <p style="text-align: center;">If you're not interested visit</p>
+            Skip login at 
             <a href="https://public.langchaindoc.com" 
                style="color: rgba(255, 255, 255, 0.9); 
                       font-weight: 500; 
@@ -28,18 +33,28 @@ function addLoginDisclaimer() {
                       background-position: 0 100%;
                       background-repeat: no-repeat;
                       padding: 0 2px;
-                      margin: 4px auto;
-                      display: inline-block;
-                      text-align: center;
                       transition: all 0.3s ease;" 
                onmouseover="this.style.color='white'; this.style.background='linear-gradient(90deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.4) 100%)'; this.style.backgroundSize='100% 1px'; this.style.backgroundPosition='0 100%'; this.style.backgroundRepeat='no-repeat'; this.style.textShadow='0 0 8px rgba(255,255,255,0.4)';" 
                onmouseout="this.style.color='rgba(255, 255, 255, 0.9)'; this.style.background='linear-gradient(90deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.2) 100%)'; this.style.backgroundSize='100% 1px'; this.style.backgroundPosition='0 100%'; this.style.backgroundRepeat='no-repeat'; this.style.textShadow='none';">
                public.langchaindoc.com
             </a>`;
         
-        // Append to the form
-        loginForm.appendChild(disclaimerElement);
-        console.log('Centered login disclaimer added');
+        // Create small disclaimer text below
+        const smallDisclaimerElement = document.createElement('div');
+        smallDisclaimerElement.style.fontSize = '11px';
+        smallDisclaimerElement.style.color = 'rgba(255, 255, 255, 0.5)';
+        smallDisclaimerElement.style.marginTop = '8px';
+        smallDisclaimerElement.style.maxWidth = '400px';
+        smallDisclaimerElement.style.textAlign = 'center';
+        smallDisclaimerElement.innerText = 'When login is skipped, conversations are not saved';
+        
+        // Add both elements to container
+        container.appendChild(disclaimerElement);
+        container.appendChild(smallDisclaimerElement);
+        
+        // Append container to the form
+        loginForm.appendChild(container);
+        console.log('Disclaimer with sub-text added');
     }
 }
 
